@@ -3,9 +3,9 @@ from bottle import request, template, redirect
 import requests
 import json
 
-if __name__ == "__main__":
-    url = "http://qiita.com/api/v2/items"
-    data = requests.get(url).json()
+url = "http://qiita.com/api/v2/items"
+data = requests.get(url).json()
+
 @get('/')
 def get_qiita():
     articles = []
