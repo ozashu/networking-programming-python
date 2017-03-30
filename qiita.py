@@ -28,9 +28,9 @@ def search_qiita():
                             user_image=article["user"]["profile_image_url"],
                             url=article["url"]
                             )
-        if keyword in article['title']:
+        if keyword in search_article['title']:
             article_title.append(search_article)
-        if keyword in article['user']['id']:
+        if keyword in search_article['user_id']:
             searched_user_id.append(search_article)
 
     return template('search_result.tpl', keyword=keyword,article_title=article_title,searched_user_id=searched_user_id)
