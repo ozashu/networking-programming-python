@@ -18,8 +18,7 @@ def get_qiita():
 
 @post('/')
 def search_qiita():
-    article_title = []
-    searched_user_id = []
+    searched_result = []
     keyword = request.forms.get('keyword')
 
     for article in data:
@@ -29,11 +28,11 @@ def search_qiita():
                             url=article["url"]
                             )
         if keyword in search_article['title']:
-            article_title.append(search_article)
+            searched_result.append(search_article)
         if keyword in search_article['user_id']:
-            searched_user_id.append(search_article)
+            searched_result.append(search_article)
 
-    return template('search_result.tpl', keyword=keyword,article_title=article_title,searched_user_id=searched_user_id)
+    return template('search_result.tpl', keyword=keyword,searched_result=searched_result)
 
 if __name__ == "__main__":
     run(host='192.168.33.10', port=8080, debug=True, reloader=True)
