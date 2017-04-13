@@ -35,4 +35,4 @@ def search_qiita():
     return template('search_result.tpl', keyword=keyword,searched_result=searched_result)
 
 if __name__ == "__main__":
-    run(host='192.168.33.10', port=8080, debug=True, reloader=True)
+    run(host='localhost', port=8080, debug=True, reloader=True)
