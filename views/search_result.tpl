@@ -1,4 +1,4 @@
-include('form.tpl')
+% include('form.tpl')
   <h2>検索結果</h2>
   <ul class=entries>
 % searched_result is not None:
