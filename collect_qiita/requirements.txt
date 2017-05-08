@@ -1,0 +1,11 @@
+Flask
+Flask-SQLAlchemy
+Flask-Script
+Flask-Session
+Flask-Login
+Flask-WTF
+Flask-Bcrypt
+itsdangerous
+Jinja2
+Werkzeug
+setuptools
