@@ -1,0 +1,38 @@
+As with other systems using BPF, Mac OS X allows users with read access to
+the BPF devices to capture packets with libpcap and allows users with write
+access to the BPF devices to send packets with libpcap.
+
+On some systems that use BPF, the BPF devices live on the root file system,
+and the permissions and/or ownership on those devices can be changed to
+give users other than root permission to read or write those devices.
+
+On newer versions of FreeBSD, the BPF devices live on devfs, and devfs can
+be configured to set the permissions and/or ownership of those devices to
+give users other than root permission to read or write those devices.
+
+On Mac OS X, the BPF devices live on devfs, but the OS X version of devfs
+is based on an older (non-default) FreeBSD devfs, and that version of devfs
+cannot be configured to set the permissions and/or ownership of those
+devices.
+
+Therefore, we supply a "launch daemon" for OS X that will change the
+ownership of the BPF devices so that the "admin" group owns them, and will
+change the permission of the BPF devices to rw-rw----, so that all users in
+the "admin" group - i.e., all users with "Allow user to administer this
+computer" turned on - have both read and write access to them.
+
+The launch daemon is in the ChmodBPF directory in the source tree. The
+org.wireshark.ChmodBPF.plist file should be copied to the
+/Library/LaunchDaemons directory. It should have the following permissions:
+
+-rw-r--r-- 1 root wheel 555B Jul 21 00:34 org.wireshark.ChmodBPF.plist
+
+If you want to give a particular user permission to access the BPF devices,
+rather than giving all administrative users permission to access them, you
+can have the ChmodBPF launch daemon plist change the ownership of /dev/bpf*
+without changing the permissions. If you want to give a particular user
+permission to read and write the BPF devices and give the administrative
+users permission to read but not write the BPF devices, you can have the
+script change the owner to that user, the group to "admin", and the
+permissions to rw-r-----. Other possibilities are left as an exercise for
+the reader.
